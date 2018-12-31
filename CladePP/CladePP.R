@@ -120,6 +120,7 @@ opt_clust_dedup<-opt_clust_dedup[!duplicated(opt_clust_dedup$Gene),]
 
 opt_clust_dedup$Rank<-rank(opt_clust_dedup$RS,ties.method = 'random')
 opt_clust_dedup$in.gold.standard<-sapply(opt_clust_dedup$Gene, function (g) ifelse(g%in%gs,'Yes','No'))
-final<-opt_clust_dedup[,c('Gene','Rank','RS','in.gold.standard','gold.standard.genes.in.cluster','Clade')]
+colnames(opt_clust_dedup)<-sub('RS','Score',colnames(opt_clust_dedup))
+final<-opt_clust_dedup[,c('Gene','Rank','Score','in.gold.standard','gold.standard.genes.in.cluster','Clade')]
 
 write.table(file=outfile,final,row.names = FALSE,quote = FALSE,sep='\t')
