@@ -2,7 +2,7 @@
 
 **Introduction**
 
-The code enclosed in this repository provides an extension of the Normalized Phylogenetic Profiling algorithm. Phylogenetic profiling (PP) is an evolution base method for prediction of gene function or interaction. PP relies on the assumption that genes that are functionally related (for example, participate in the same cellular pathway or are members of a common protein complex) manifest correlated patterns of occurrence and absence across the phylogenetic tree. 
+The code enclosed in this repository provides an extension of the Normalized Phylogenetic Profiling algorithm. Phylogenetic profiling (PP) is an evolution bases method for prediction of gene function or interaction. PP relies on the assumption that genes that are functionally related (for example, participate in the same cellular pathway or are members of a common protein complex) manifest correlated patterns of occurrence and absence across the phylogenetic tree. 
 In PP analysis, each gene is represented using a phylogeneitc profile, a vector indiacating the presence or absence of a homolog for the gene across many evolutionarily diverse species.
 Given a gene or a set of genes of interest, the algorithm searches for additonal genes with similiar phylogenetic profiles, thus highlighting potential funcational or interaction partners of the query gene(s).
 
