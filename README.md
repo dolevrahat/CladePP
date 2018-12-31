@@ -10,3 +10,7 @@ Given a gene or a set of genes of interest, the algorithm searches for additonal
 
 While most current PP methods examine co-evolution between genes across the entire tree of life (global co-evolution), CladePP combines signals from global co-evolution with signals from gene pairs that are co-evolved within the context of a specific clade (local co-evolution) in order to refine predictions.
 
+**Perquisites**
+CladePP is implemented in R and requires the R libriries plyr, dplyr and optparse avilable from CRAN. Calculating a false discovery rate for the predictions also requires the qvalue library from Bioconductor.
+
+**Generating CladePP predictions**
