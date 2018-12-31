@@ -1,3 +1,5 @@
+#!/usr/bin/Rscript
+
 # This script is meant to be run after generating a MRS table using the MRS_master.R script
 # and a series of files containing MRS tables for simulated gene sets using the MRS_permutation_tests.R script.
 # This scrips acceptes in the permdir argument the directory holding the results of the simulated genes sets
@@ -7,11 +9,12 @@
 # estimated from the simulated gene sets and the q-value adjusting the p-value for multiple hypothesis testing.
 # The new table is saved to a file whose name is specficied in the outfile argument.
 
-#!/usr/bin/Rscript
 
+suppressPackageStartupMessages({
 library('qvalue')
 library('dplyr')
 library('optparse')
+})
 
 options<-list(
   make_option('--permdir',action='store',type='character'),
@@ -20,18 +23,19 @@ options<-list(
 )
 parser<-OptionParser(option_list=options)
 args<-parse_args(parser)
-setwd(args$permdir)
-permfiles<-list.files(pattern='.rds')
 
-MRSdf<-read.csv(args$MRStable,stringsAsFactors=FALSE)
+MRSdf<-read.table(args$MRStable,stringsAsFactors=FALSE,header=TRUE,sep='\t')
+
+
+permfiles<-list.files(pattern='.rds',path=args$permdir,full.names=TRUE)
+
+
 perm_max_MRS_list<-lapply(permfiles,function(file){
-  print(proc.time()-ptm)
   try({
   perm<-readRDS(file)
   rsv<-unlist(lapply(perm,function(x) x[['MRStable']]$RS))
   rm(perm)
   gc()
-  print(length(rsv))
   return(rsv)
 })})
 
@@ -58,8 +62,10 @@ MRSdf$FDR<-p.adjust(MRSdf$p.value,method='BH')
 try({
 MRSdf$q.value<-qvalue(MRSdf$p.value)[['qvalues']]
 })
-write.csv(file=args$outfile,
-     MRSdf,row.names = FALSE)
+MRSdf<-MRSdf[,which(colnames(MRSdf)!='p.int')]
+print(colnames(MRSdf))
+write.table(file=args$outfile,
+     MRSdf,row.names = FALSE,quote=FALSE,sep='\t')
 save(file='mergedpertest.rdata',MRSdf,t,n_obs)
 
 
