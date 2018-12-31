@@ -1,6 +1,6 @@
 # CladePP
 
-**Introduction 
+**Introduction**
 
 The code enclosed in this repository provides an extension of the Normalized Phylogenetic Profiling algorithm describe in Tabach, Yuval, et al. "Identification of small RNA pathway genes using patterns of phylogenetic conservation and divergence." Nature 493.7434 (2013): 694.
 
