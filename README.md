@@ -10,14 +10,17 @@ While most current PP methods examine co-evolution between genes across the enti
 
 **Perquisites**
 
-CladePP is implemented in R and requires the R libriries plyr, dplyr and optparse avilable from CRAN. Calculating a false discovery rate for the predictions also requires the qvalue library from Bioconductor.
+CladePP is implemented in R and requires the R libriries plyr, dplyr and optparse avilable from CRAN. Calculating a false discovery rate for the predictions also requires the qvalue library from Bioconductor or from https://github.com/StoreyLab/qvalue.
 
 **Generating CladePP predictions**
 
 The main algorithm is run using the CladePP.R script.
 The script takes three inputs:
+
 clusters - a RDS file with a list of of hclust objects. Each object represents the output of hierarchial clustering of a subset of columns of a noramlized phylogenetic profilign matrix corresponding to a given clade. The names of the list should correspond to the names of the clades.
+
 genelist - a text file with the gene symbols of the genes of interest.
+
 outfile - path of the desired output file.
 
 The output of the CladePP script is a tab delimited table which indicates for each gene its score (higher score indicates that the phylogenetic profile of the gene clusters tightly with the phylogeneitc profile of gene(s) in the query genelist. See out paper for details on how the score is computed), with which genes in the query it co-evolved and in which clade.
